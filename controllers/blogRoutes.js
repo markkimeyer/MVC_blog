@@ -18,6 +18,10 @@ router.get('/dashboard', (req, res) => {
       res.render('homepage', {blog: Blog} );
   });
 
+  router.get('/signup', (req, res) => {
+    res.render('signup');
+});
+
 
   
 
