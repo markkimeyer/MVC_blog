@@ -1,14 +1,20 @@
 const router = require('express').Router();
 
-router.get('/blog', (req, res) => {
+router.get('/dashboard', (req, res) => {
     if (req.session.logged_in) {
       console.log("blog page accessed");
-      res.render('blogpage', {layout: 'blogMain.handlebars'});
-      return;
+      res.render('dashboard', {layout: 'blogMain.handlebars'});
     } 
     else {
-        res.render('loginpage');
+        res.render('login');
+        //   alert('Please login to access the Dashboard');
     }
+  });
+
+  router.get('/home', (req, res) => {
+      console.log("home page accessed");
+      res.render('homepage');
+      return;
   });
 
 //   router.post('/logout', (req, res) => {
