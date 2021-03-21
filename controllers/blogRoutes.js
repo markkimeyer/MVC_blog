@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const Blog = require('../seeds/blogData.json');
+
+
 
 router.get('/dashboard', (req, res) => {
     if (req.session.logged_in) {
@@ -12,19 +15,11 @@ router.get('/dashboard', (req, res) => {
   });
 
   router.get('/home', (req, res) => {
-      console.log("home page accessed");
-      res.render('homepage');
-      return;
+      res.render('homepage', {blog: Blog} );
   });
 
-//   router.post('/logout', (req, res) => {
-//     if (req.session.logged_in) {
-//       req.session.destroy(() => {
-//         res.status(204).end();
-//       });
-//     } else {
-//       res.status(404).end();
-//     }
-//   });
+
   
+
+
     module.exports = router;
