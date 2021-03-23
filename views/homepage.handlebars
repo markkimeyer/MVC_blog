@@ -1,9 +1,21 @@
-{{#each blog}}
-<div>
+{{#each blogPosts}}
+<div class = "card">
+    <div class = "card-body">
+        <h2 class="card-header">{{title}}</h2>
+        </br>
+        <h6 class="card-subtitle mb-2 text-muted">Created by: {{user.name}}</h6>
+        <p class="card-text">
+            
+            {{text}}
 
-<h2> {{title}} by {{user_id}}</h2>
+        </p>
+ </div>
+        {{!-- <a href="#" class="btn btn-primary btn-disabled">Edit</a> --}}
+   
+
+{{!-- <h2> {{title}} by {{user_id}}</h2>
 <h3> {{text}} </h3>
-<h4> {{created_at}} </h4>
+<h4> {{created_at}} </h4> --}}
 
 </div>
 {{/each}}

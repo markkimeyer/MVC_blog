@@ -1,5 +1,0 @@
-const saveBlog = function () {
-  const newBlog = {
-    title: $noteTitle.val(),
-    text: $noteText.val(),
-  };

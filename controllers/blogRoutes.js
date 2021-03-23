@@ -1,22 +1,50 @@
 const router = require('express').Router();
-const Blog = require('../seeds/blogData.json');
+const { User, Blog } = require('../models');
+// const Blog = require('../seeds/blogData.json');
 
 
 
-router.get('/dashboard', (req, res) => {
-    if (req.session.logged_in) {
+router.get('/dashboard', async (req, res) => {
+    // if (req.session.logged_in) {
       console.log("blog page accessed");
-      res.render('dashboard', {layout: 'blogMain.handlebars'});
-    } 
-    else {
-        res.render('login');
-        //   alert('Please login to access the Dashboard');
-    }
-  });
+      
+//new
+try {
+    const blogData = await Blog.findAll({
+      include: [{ model: User }],
+    });
 
-  router.get('/home', (req, res) => {
-      res.render('homepage', {blog: Blog} );
+    const blogPosts = blogData.map((Blog) => Blog.get({ plain: true }));
+
+    console.log(blogPosts);
+    res.render("dashboard", {blogPosts,
+        //added session login instead of if/else logged in
+    logged_in: req.session.logged_in,
   });
+} catch (err) {
+  res.status(500).json(err);
+}
+finally {
+    if (!req.session.logged_in) {
+      res.redirect('/login');}
+  }
+});
+
+
+
+  router.get('/home', async (req, res) => {
+    try {
+        const blogData = await Blog.findAll({
+          include: [{ model: User }],
+        });
+
+        const blogPosts = blogData.map((Blog) => Blog.get({ plain: true }));
+
+      res.render('homepage', {blogPosts,  logged_in: req.session.logged_in});
+    } catch (err) {
+        res.status(500).json(err);
+      }
+      });
 
   router.get('/signup', (req, res) => {
     res.render('signup');
