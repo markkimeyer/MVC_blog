@@ -11,6 +11,9 @@ const signupFormHandler = async (event) => {
         body: JSON.stringify({ name, email, password }),
         headers: { 'Content-Type': 'application/json' },
       });
+
+      const data = await response.json()
+      console.log('DATA --> ', data)
   
       if (response.ok) {
         document.location.replace('/dashboard');
