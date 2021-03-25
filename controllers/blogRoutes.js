@@ -59,6 +59,20 @@ finally {
           
 
 
-
+    router.post('/newpost', async (req, res) => {
+        try {
+          const newPost = await Blog.create(req.body);
+      
+          req.session.save(() => {
+            req.session.title =newPost.title;
+            req.session.text=newPost.text;
+            // req.session.user_id = newPost.user_id;
+      
+            res.status(200).json(newPost);
+          });
+        } catch (err) {
+          res.status(400).json(err);
+        }
+      });
 
     module.exports = router;
