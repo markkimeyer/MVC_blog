@@ -25,4 +25,5 @@ const newPostHandler = async (event) => {
 
 document
     .querySelector('.submitPost')
-    .addEventListener('submit', newPostHandler);
+    .addEventListener('click', newPostHandler);
+
